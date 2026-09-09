@@ -1,0 +1,1629 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111a2b">
+  <meta name="description" content="A housewarming invitation for Albert FJ and Salini Joseph.">
+  <title>Welcome to Our New Home</title>
+  <link rel="preload" as="image" href="assets/house-wide.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #eee7df;
+      --paper: #fcfaf7;
+      --green: #26364b;
+      --deep: #111a2b;
+      --gold: #d48a68;
+      --ink: #28303c;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: var(--sans);
+      overflow-x: hidden;
+      max-width: 100vw;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, a {
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid #e2c77f;
+      outline-offset: 4px;
+    }
+
+    /* Fixed Music Button */
+    .music {
+      position: fixed;
+      z-index: 30;
+      top: max(16px, env(safe-area-inset-top));
+      right: max(16px, env(safe-area-inset-right));
+      border: 1px solid rgba(255, 255, 255, 0.44);
+      background: rgba(17, 26, 43, 0.85);
+      color: #fff;
+      border-radius: 24px;
+      padding: 9px 16px;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .music:hover { background: #b55f4b; transform: translateY(-2px); }
+    .music.playing { animation: softPulse 2.3s infinite; }
+    @keyframes softPulse { 50% { box-shadow: 0 0 0 8px rgba(212, 138, 104, 0.25); } }
+
+    /* Cinematic Journey Section */
+    .journey {
+      height: 480vh;
+      position: relative;
+    }
+    .stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: var(--deep);
+    }
+    .house {
+      position: absolute;
+      inset: -5%;
+      width: 110%;
+      height: 110%;
+      object-fit: cover;
+      object-position: center 38%;
+      will-change: transform, opacity;
+    }
+    .house.close { opacity: 0; }
+    .ambient-backdrop { display: none; }
+    .view-toggle { display: none; }
+    .veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 27, 19, 0.2) 0%, rgba(9, 28, 20, 0.15) 40%, rgba(9, 28, 20, 0.52) 100%);
+      pointer-events: none;
+    }
+    .hero-copy {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 9vh 7vw;
+      text-align: center;
+      color: white;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+      pointer-events: none;
+    }
+    .scene {
+      grid-area: 1/1;
+      width: min(720px, 100%);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.25s linear, transform 0.25s linear;
+    }
+    .scene.active { opacity: 1; transform: none; }
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .hero-copy h1 {
+      margin: 0.18em 0;
+      font: 600 clamp(2.8rem, 7.5vw, 6.5rem)/0.92 var(--serif);
+      overflow-wrap: break-word;
+    }
+    .hero-copy h2 {
+      margin: 0.28em 0;
+      font: 500 clamp(2.4rem, 6vw, 4.8rem)/0.98 var(--serif);
+      overflow-wrap: break-word;
+    }
+    .hero-copy p {
+      max-width: 520px;
+      margin: 1.1rem auto;
+      font: 400 clamp(1rem, 2vw, 1.3rem)/1.5 var(--serif);
+      letter-spacing: 0.02em;
+    }
+    .scene:nth-child(3) p {
+      font-weight: 700;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.9);
+    }
+    .scroll-cue {
+      position: absolute;
+      z-index: 3;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      text-align: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+    .scroll-cue::after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 32px;
+      margin: 8px auto 0;
+      background: white;
+      animation: scroll 1.8s infinite;
+    }
+    @keyframes scroll { 50% { transform: scaleY(0.35); transform-origin: top; } }
+
+    /* Invitation Sections */
+    .section {
+      position: relative;
+      padding: clamp(68px, 10vw, 130px) 24px;
+      text-align: center;
+    }
+    .paper { background: var(--paper); }
+    .section::before {
+      content: "◆";
+      display: block;
+      color: var(--gold);
+      font-size: 0.65rem;
+      margin-bottom: 18px;
+    }
+    .intro {
+      background: linear-gradient(145deg, #fcfaf7 0%, #f1e5df 100%);
+    }
+    .kicker {
+      color: #b55f4b;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .display {
+      color: var(--green);
+      font: 600 clamp(2.8rem, 6.5vw, 5.5rem)/0.92 var(--serif);
+      margin: 0.25em 0;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+    .script {
+      color: #a24e43;
+      font: italic 500 clamp(1.45rem, 3vw, 2.35rem)/1.18 var(--serif);
+    }
+    .intro .names {
+      margin: 1rem auto 0.2rem;
+      color: #26364b;
+      font: 600 clamp(2.2rem, 5vw, 4.2rem)/0.95 var(--serif);
+      overflow-wrap: break-word;
+    }
+    .copy {
+      max-width: 620px;
+      margin: 1rem auto;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+    .flourish {
+      color: var(--gold);
+      margin: 22px auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+    .flourish::before, .flourish::after {
+      content: "";
+      width: min(105px, 20vw);
+      height: 1px;
+      background: currentColor;
+    }
+
+    /* Ceremony Section */
+    .ceremony {
+      background: linear-gradient(135deg, #111a2b 0%, #2d4058 100%);
+      color: var(--paper);
+    }
+    .ceremony .display, .ceremony .script { color: #f4c6ab; }
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 2rem auto;
+      max-width: 580px;
+    }
+    .date > div {
+      padding: 12px 24px;
+      border-inline: 1px solid rgba(244, 198, 171, 0.55);
+    }
+    .date strong {
+      display: block;
+      color: #f4c6ab;
+      font: 600 clamp(1.8rem, 3.5vw, 2.9rem)/1.08 var(--serif);
+    }
+    .date span {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.68rem;
+    }
+
+    /* Add to Calendar Component */
+    .cal-wrapper {
+      position: relative;
+      display: inline-block;
+      margin: 0.5rem auto 1.8rem;
+      z-index: 10;
+    }
+    .cal-btn {
+      background: rgba(244, 198, 171, 0.12);
+      border: 1px solid rgba(244, 198, 171, 0.45);
+      color: #f4c6ab;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .cal-btn:hover {
+      background: #f4c6ab;
+      color: var(--deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(244, 198, 171, 0.25);
+    }
+    .cal-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      background: rgba(17, 26, 43, 0.96);
+      border: 1px solid rgba(212, 138, 104, 0.5);
+      border-radius: 14px;
+      padding: 8px;
+      min-width: 255px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .cal-dropdown[hidden] {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-6px);
+      pointer-events: none;
+      display: flex;
+    }
+    .cal-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      color: #fcfaf7;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 8px;
+      text-align: left;
+      transition: background 0.18s, color 0.18s;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+    }
+    .cal-option:hover, .cal-option:active {
+      background: rgba(244, 198, 171, 0.16);
+      color: #f4c6ab;
+    }
+    .cal-opt-icon {
+      font-size: 1.05rem;
+      width: 20px;
+      text-align: center;
+    }
+    .priest {
+      color: #f4c6ab;
+      font: 600 clamp(1.6rem, 3.8vw, 3.1rem)/1.15 var(--serif);
+      margin: 0.25em 0;
+      overflow-wrap: break-word;
+    }
+    .sub {
+      margin: 0;
+      font: italic 1.05rem var(--serif);
+      opacity: 0.9;
+    }
+
+    /* Countdown Grid */
+    .count-grid {
+      max-width: 740px;
+      margin: 32px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .count {
+      border: 1px solid rgba(180, 148, 82, 0.55);
+      padding: 18px 8px;
+      background: rgba(255, 253, 248, 0.7);
+      border-radius: 12px;
+    }
+    .count b {
+      display: block;
+      color: var(--green);
+      font: 600 clamp(2rem, 4.5vw, 3.8rem)/1 var(--serif);
+    }
+    .count span {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.62rem;
+      margin-top: 4px;
+      display: block;
+    }
+    .complete {
+      color: var(--green);
+      font: italic 2rem var(--serif);
+      margin-top: 25px;
+    }
+
+    /* Verse Section */
+    .verse {
+      background: linear-gradient(135deg, #dfe5ea 0%, #efe2dc 100%);
+    }
+    .verse blockquote {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--green);
+      font: italic 500 clamp(1.9rem, 4.2vw, 4.2rem)/1.18 var(--serif);
+      overflow-wrap: break-word;
+    }
+    .verse cite {
+      display: block;
+      margin-top: 22px;
+      color: #b55f4b;
+      font: 600 0.95rem var(--sans);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    /* Location Section */
+    .location-card {
+      max-width: 580px;
+      width: 100%;
+      margin: 30px auto 0;
+      padding: clamp(32px, 6vw, 60px) 24px;
+      border: 1px solid #d48a68;
+      background: #fffdfa;
+      box-shadow: 8px 8px 0 rgba(212, 138, 104, 0.18);
+      border-radius: 14px;
+    }
+    .pin { font-size: 1.5rem; }
+    .address {
+      color: var(--green);
+      font: 500 clamp(1.35rem, 2.8vw, 2.1rem)/1.3 var(--serif);
+      overflow-wrap: break-word;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 18px;
+      border: 1px solid #b55f4b;
+      background: #b55f4b;
+      color: white;
+      padding: 14px 26px;
+      text-decoration: none;
+      letter-spacing: 0.13em;
+      font-size: 0.74rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .button:hover {
+      background: var(--deep);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+    /* RSVP Section */
+    .rsvp {
+      background: linear-gradient(135deg, #26364b 0%, #111a2b 100%);
+      color: var(--paper);
+    }
+    .rsvp .display, .rsvp .script { color: #f4c6ab; }
+    .phone-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 1.4rem auto;
+    }
+    .phone-item {
+      color: #f4c6ab;
+      text-decoration: none;
+      font: 600 clamp(1.25rem, 3.2vw, 1.85rem) var(--serif);
+      letter-spacing: 0.03em;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .phone-item:hover, .phone-item:active {
+      background: rgba(244, 198, 171, 0.15);
+      color: #fff;
+    }
+    .phone-sep {
+      color: rgba(244, 198, 171, 0.45);
+      font-size: 1.2rem;
+    }
+    .rsvp .button {
+      background: #f4c6ab;
+      color: var(--deep);
+      border-color: #f4c6ab;
+    }
+    .rsvp .button:hover {
+      background: white;
+      border-color: white;
+    }
+
+    /* Footer */
+    .footer {
+      background: #111a2b;
+      color: #f4c6ab;
+      padding: 40px 24px calc(40px + env(safe-area-inset-bottom));
+      text-align: center;
+      font: italic 1.15rem var(--serif);
+    }
+    .footer strong {
+      display: block;
+      margin-top: 8px;
+      font: 500 1.35rem var(--serif);
+    }
+
+    /* Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Celebration Sparks */
+    .celebration {
+      position: fixed;
+      z-index: 30;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .spark {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--spark);
+      animation: burst 1.8s cubic-bezier(.12,.78,.22,1) forwards;
+    }
+    .sparkle-note {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      background: rgba(17, 26, 43, 0.92);
+      border: 1px solid #f4c6ab;
+      padding: 16px 24px;
+      font: italic clamp(1.5rem, 5vw, 2rem) var(--serif);
+      text-align: center;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+      border-radius: 12px;
+      animation: noteOut 3s ease forwards;
+    }
+    .sparkle-note small {
+      display: block;
+      margin-top: 4px;
+      font: 600 0.65rem var(--sans);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    @keyframes burst { to { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
+    @keyframes noteOut { 0%, 72% { opacity: 1; } 100% { opacity: 0; } }
+
+    /* Host Analytics & Viewer Tracking UI */
+    .host-secret-trigger {
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s, color 0.2s;
+      display: inline-block;
+      padding: 4px 8px;
+    }
+    .host-secret-trigger:active { transform: scale(1.2); color: #f4c6ab; }
+    .host-pill {
+      position: fixed;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      left: max(16px, env(safe-area-inset-left));
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(17, 26, 43, 0.94);
+      border: 1px solid rgba(212, 138, 104, 0.6);
+      color: #fcfaf7;
+      padding: 8px 15px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      animation: pillFadeIn 0.35s ease;
+    }
+    .host-pill:hover { transform: translateY(-2px); border-color: #f4c6ab; }
+    .host-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 10px #4ade80;
+      animation: hostPulse 2s infinite;
+    }
+    .host-pill-tag {
+      background: rgba(212, 138, 104, 0.22);
+      color: #f4c6ab;
+      border: 1px solid rgba(212, 138, 104, 0.4);
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .host-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(9, 15, 26, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      animation: backdropIn 0.25s ease;
+    }
+    .host-modal-card {
+      background: linear-gradient(150deg, #111a2b 0%, #1f2f45 100%);
+      border: 1px solid rgba(212, 138, 104, 0.5);
+      border-radius: 20px;
+      padding: 26px 22px;
+      max-width: 440px;
+      width: 100%;
+      color: #fcfaf7;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+      position: relative;
+      animation: cardIn 0.25s ease;
+    }
+    .host-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fcfaf7;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .host-modal-close:hover { background: #b55f4b; }
+    .host-modal-header { text-align: center; margin-bottom: 20px; }
+    .host-modal-header .kicker { color: #f4c6ab; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; }
+    .host-modal-header h3 { margin: 5px 0 2px; font: 600 2rem/1.1 var(--serif); color: #fff; }
+    .host-modal-header p { margin: 0; font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); }
+    .host-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+    .host-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 138, 104, 0.35);
+      border-radius: 12px;
+      padding: 16px 10px;
+      text-align: center;
+    }
+    .host-card b { display: block; font: 600 clamp(2.2rem, 5.5vw, 3rem)/1 var(--serif); color: #f4c6ab; }
+    .host-card span { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.75); margin-top: 4px; }
+    .host-shield {
+      background: rgba(38, 54, 75, 0.65);
+      border-left: 3px solid #4ade80;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.76rem;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .host-shield strong { color: #4ade80; display: block; margin-bottom: 2px; }
+    .host-actions { display: flex; flex-direction: column; gap: 10px; }
+    .host-btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .host-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 138, 104, 0.4);
+      color: #fcfaf7;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .host-btn:hover, .host-btn:active { background: rgba(212, 138, 104, 0.25); border-color: #f4c6ab; }
+    .host-btn.primary { background: #b55f4b; border-color: #b55f4b; color: #fff; font-weight: 600; }
+    .host-btn.primary:hover { background: #c8644f; }
+    .host-btn.danger { border-color: rgba(239, 68, 68, 0.4); color: #fca5a5; }
+    .host-btn.danger:hover { background: rgba(239, 68, 68, 0.2); }
+    .host-sync-status { text-align: center; font-size: 0.7rem; color: rgba(255, 255, 255, 0.55); margin-top: 12px; }
+    .host-pin-input {
+      width: 100%;
+      padding: 13px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 138, 104, 0.5);
+      border-radius: 10px;
+      color: white;
+      font-size: 1.4rem;
+      text-align: center;
+      letter-spacing: 0.35em;
+      margin: 14px 0;
+      outline: none;
+    }
+    .host-pin-input:focus { border-color: #f4c6ab; box-shadow: 0 0 0 3px rgba(244,198,171,0.25); }
+    .host-pin-error { color: #fca5a5; font-size: 0.76rem; text-align: center; min-height: 1.2em; margin-bottom: 8px; }
+    .host-toast {
+      position: fixed;
+      top: max(20px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 60;
+      background: #111a2b;
+      border: 1px solid #d48a68;
+      color: #fcfaf7;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      animation: toastIn 0.3s ease;
+      white-space: nowrap;
+      max-width: 90vw;
+    }
+    @keyframes pillFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes backdropIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes cardIn { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    @keyframes hostPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); } 50% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); } }
+    @keyframes toastIn { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+    /* ======================================================= */
+    /* MOBILE-FIRST OPTIMIZATIONS (Smartphones & Small Tablets) */
+    /* ======================================================= */
+    @media (max-width: 768px) {
+      /* Snappy, effortless cinematic scroll */
+      .journey { height: 260vh; }
+      .stage {
+        height: 100dvh;
+        background: #111a2b;
+        overflow: hidden;
+      }
+      /* Ambient backdrop fills phone screen with atmospheric colors */
+      .ambient-backdrop {
+        display: block;
+        position: absolute;
+        inset: -10%;
+        width: 120%;
+        height: 120%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .ambient-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 38%;
+        filter: blur(30px) brightness(0.32) saturate(1.25);
+        -webkit-filter: blur(30px) brightness(0.32) saturate(1.25);
+        transform: scale(1.12);
+        will-change: opacity, transform;
+      }
+      .ambient-img.close { opacity: 0; }
+
+      /* FULL HOUSE ON PHONE: 100% visible, zero cropping */
+      .house {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* SHOWS 100% OF THE HOUSE */
+        object-position: center 52%;
+        z-index: 2;
+        filter: drop-shadow(0 14px 40px rgba(0, 0, 0, 0.75));
+        transition: object-fit 0.25s ease, object-position 0.25s ease;
+      }
+      /* Optional Fill Mode if user toggles to zoom */
+      .stage.fill-mode .house {
+        object-fit: cover;
+        object-position: center 36%;
+      }
+
+      .veil {
+        z-index: 2;
+        background: linear-gradient(
+          180deg,
+          rgba(17, 26, 43, 0.65) 0%,
+          rgba(17, 26, 43, 0.08) 28%,
+          rgba(17, 26, 43, 0.08) 72%,
+          rgba(17, 26, 43, 0.85) 100%
+        );
+      }
+
+      /* View Toggle Button on Mobile */
+      .view-toggle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        position: fixed;
+        top: max(12px, env(safe-area-inset-top));
+        left: max(12px, env(safe-area-inset-left));
+        z-index: 30;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(17, 26, 43, 0.85);
+        color: #fff;
+        border-radius: 20px;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+        cursor: pointer;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+        transition: background 0.2s, transform 0.2s;
+      }
+      .view-toggle:hover { background: #b55f4b; }
+
+      .hero-copy {
+        z-index: 3;
+        padding: calc(60px + env(safe-area-inset-top)) 16px calc(38px + env(safe-area-inset-bottom));
+        pointer-events: none;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.88), 0 0 24px rgba(0, 0, 0, 0.7);
+      }
+      .scene:first-child {
+        align-self: stretch;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .scene:first-child .scene-top {
+        margin-top: 4px;
+      }
+      .scene:first-child .scene-sub {
+        margin: 0 auto 28px;
+        font-size: clamp(0.92rem, 3.4vw, 1.1rem);
+      }
+      .hero-copy h1 {
+        font-size: clamp(2rem, 7.2vw, 2.75rem);
+        line-height: 1.05;
+        margin: 0.15em 0;
+      }
+      .hero-copy h2 {
+        font-size: clamp(1.95rem, 7vw, 2.7rem);
+        line-height: 1.1;
+        margin: 0.25em 0;
+      }
+      .hero-copy p {
+        font-size: clamp(0.98rem, 3.8vw, 1.18rem);
+        line-height: 1.5;
+        max-width: 320px;
+        margin: 0.8rem auto;
+      }
+      .eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+      }
+      .scroll-cue {
+        font-size: 0.62rem;
+      }
+      .scroll-cue::after {
+        height: 24px;
+        margin-top: 6px;
+      }
+
+      /* Compact, thumb-friendly music button */
+      .music {
+        top: max(12px, env(safe-area-inset-top));
+        right: max(12px, env(safe-area-inset-right));
+        padding: 8px 13px;
+        font-size: 0.74rem;
+        border-radius: 20px;
+      }
+
+      /* Balanced section rhythm */
+      .section {
+        padding: 56px 18px;
+      }
+      .display {
+        font-size: clamp(2.25rem, 8.2vw, 3.2rem) !important;
+        line-height: 1.05;
+        margin: 0.2em 0;
+      }
+      .script {
+        font-size: clamp(1.28rem, 4.6vw, 1.7rem);
+        line-height: 1.25;
+      }
+      .intro .names {
+        font-size: clamp(1.85rem, 6.6vw, 2.5rem);
+        line-height: 1.15;
+        margin: 0.7rem auto 0.2rem;
+      }
+      .copy {
+        font-size: 0.94rem;
+        line-height: 1.65;
+        max-width: 95%;
+        margin: 0.9rem auto;
+      }
+
+      /* Elegant 2-Column Date & Time Cards */
+      .date {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 1.6rem auto;
+        max-width: 340px;
+      }
+      .date > div {
+        padding: 14px 8px;
+        border: 1px solid rgba(244, 198, 171, 0.4);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(8px);
+      }
+      .date strong {
+        font-size: clamp(1.45rem, 5.2vw, 1.85rem);
+        line-height: 1.12;
+        margin-top: 4px;
+      }
+      .date span {
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+      }
+      .cal-wrapper {
+        margin: 0.3rem auto 1.5rem;
+      }
+      .cal-btn {
+        padding: 9px 18px;
+        font-size: 0.74rem;
+      }
+      .cal-dropdown {
+        width: min(290px, calc(100vw - 36px));
+      }
+      .priest {
+        font-size: clamp(1.45rem, 5.4vw, 2rem);
+        line-height: 1.2;
+        padding: 0 6px;
+      }
+      .sub {
+        font-size: 0.92rem;
+      }
+
+      /* Proportional Countdown Badges */
+      .count-grid {
+        gap: 7px;
+        max-width: 340px;
+        margin: 22px auto 0;
+      }
+      .count {
+        padding: 12px 4px;
+        border-radius: 10px;
+        background: rgba(255, 253, 248, 0.9);
+      }
+      .count b {
+        font-size: clamp(1.6rem, 6vw, 2.1rem);
+        line-height: 1;
+      }
+      .count span {
+        font-size: 0.58rem;
+        letter-spacing: 0.08em;
+      }
+
+      /* Scripture Blockquote */
+      .verse blockquote {
+        font-size: clamp(1.42rem, 5.2vw, 2rem);
+        line-height: 1.32;
+        padding: 0 4px;
+      }
+      .verse cite {
+        font-size: 0.8rem;
+        margin-top: 16px;
+      }
+
+      /* Location Card */
+      .location-card {
+        width: 100%;
+        margin: 20px auto 0;
+        padding: 26px 16px;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(212, 138, 104, 0.16);
+      }
+      .address {
+        font-size: clamp(1.22rem, 4.6vw, 1.55rem);
+        line-height: 1.35;
+      }
+      .button {
+        display: block;
+        width: 100%;
+        max-width: 270px;
+        margin: 18px auto 0;
+        padding: 14px 18px;
+        border-radius: 8px;
+        font-size: 0.74rem;
+      }
+
+      /* RSVP Mobile Phone Buttons */
+      .phone-group {
+        flex-direction: column;
+        gap: 10px;
+        margin: 1.4rem auto;
+      }
+      .phone-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(244, 198, 171, 0.4);
+        padding: 10px 18px;
+        border-radius: 30px;
+        width: 100%;
+        max-width: 260px;
+        font-size: 1.35rem;
+      }
+      .phone-sep { display: none; }
+
+      /* Footer */
+      .footer {
+        padding: 34px 18px calc(34px + env(safe-area-inset-bottom));
+        font-size: 1.05rem;
+      }
+      .footer strong {
+        font-size: 1.18rem;
+        line-height: 1.4;
+      }
+
+      /* Host Controls on Mobile */
+      .host-pill {
+        bottom: max(14px, env(safe-area-inset-bottom));
+        left: max(12px, env(safe-area-inset-left));
+        padding: 7px 13px;
+        font-size: 0.74rem;
+      }
+      .host-modal-backdrop {
+        padding: 12px;
+        align-items: flex-end;
+      }
+      .host-modal-card {
+        border-radius: 20px 20px 12px 12px;
+        padding: 22px 18px calc(20px + env(safe-area-inset-bottom));
+        max-height: 88vh;
+        overflow-y: auto;
+      }
+      .host-btn-row { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .journey { height: 200vh; }
+      .house { will-change: auto; }
+      .music.playing, .scroll-cue::after { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .scene { transition: opacity 0.1s; }
+      .button, .music { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="music" loop preload="none"><source src="assets/background-music.mp3" type="audio/mpeg"></audio>
+  <button class="music" id="musicButton" type="button" aria-label="Turn background music on" title="Play background music">🎵 Music Off</button>
+  <main>
+    <section class="journey" aria-label="A cinematic approach to our home">
+      <div class="stage" id="stage">
+        <div class="ambient-backdrop" aria-hidden="true">
+          <img class="ambient-img wide" src="assets/house-wide.jpg" alt="">
+          <img class="ambient-img close" src="assets/house-close.jpg" alt="">
+        </div>
+        <img class="house wide" src="assets/house-wide.jpg" alt="Wide front view of Albert and Salini's new home">
+        <img class="house close" src="assets/house-close.jpg" alt="Close front view of Albert and Salini's new home">
+        <div class="veil"></div>
+        <button class="view-toggle" id="viewToggle" type="button" aria-label="Toggle photo framing" title="Toggle Full House View">
+          <span id="viewToggleIcon">📐</span> <span id="viewToggleText">Full House</span>
+        </button>
+        <div class="hero-copy" aria-live="polite">
+          <div class="scene active">
+            <div class="scene-top">
+              <p class="eyebrow">A New Chapter Begins…</p>
+              <h1>Welcome<br>to Our New Home</h1>
+            </div>
+            <p class="scene-sub">Scroll down and come a little closer…</p>
+          </div>
+          <div class="scene"><p class="eyebrow">Every Home Has a Story</p><h2>Every Home<br>Has a Story</h2></div>
+          <div class="scene"><p>A story built with love,<br>filled with dreams,<br>and blessed with countless memories yet to come.</p></div>
+          <div class="scene"><p class="eyebrow">A Warm Welcome</p><h2>Welcome to<br>Our New Home</h2></div>
+        </div><div class="scroll-cue">Begin the journey</div>
+      </div>
+    </section>
+    <section class="section intro paper"><div class="reveal"><p class="script">With immense joy &amp; profound gratitude to God</p><p class="kicker">We welcome you to</p><h2 class="display">Our New Home</h2><div class="flourish">❦</div><p class="names">Albert FJ &amp; Salini Joseph</p><p class="script">and our children &amp;</p><p class="names" style="font-size:clamp(2rem,4vw,3.5rem)">Joseph Franglin</p><p class="copy">cordially invite you with your family for the</p><h2 class="display" style="font-size:clamp(2.8rem,6vw,4.8rem)">Housewarming<br>Ceremony</h2></div></section>
+    <section class="section ceremony"><div class="reveal"><p class="kicker" style="color:#f5dfaa">You are invited</p><h2 class="display">Housewarming Ceremony</h2><div class="flourish">✦</div><div class="date"><div><span>Monday</span><strong>14 September<br>2026</strong></div><div><span>Time</span><strong>9:00<br>a.m.</strong></div></div>
+    <!-- Add to Calendar Button & Dropdown -->
+    <div class="cal-wrapper">
+      <button type="button" class="cal-btn" id="calBtnTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Add housewarming ceremony to your calendar">
+        <span>📅</span> Add to Calendar
+      </button>
+      <div class="cal-dropdown" id="calDropdown" hidden>
+        <a class="cal-option" id="calGoogle" target="_blank" rel="noopener noreferrer" href="#">
+          <span class="cal-opt-icon">🗓️</span> Google Calendar
+        </a>
+        <button type="button" class="cal-option" id="calApple">
+          <span class="cal-opt-icon">🍏</span> Apple Calendar (iPhone / Mac)
+        </button>
+        <a class="cal-option" id="calOutlook" target="_blank" rel="noopener noreferrer" href="#">
+          <span class="cal-opt-icon">📨</span> Outlook Calendar
+        </a>
+        <button type="button" class="cal-option" id="calIcs">
+          <span class="cal-opt-icon">📥</span> Download .ICS File
+        </button>
+      </div>
+    </div>
+    <p class="script">Housewarming Service</p><p class="priest">Rev. Fr. Johnson Ottathenginkal</p><p class="sub">(Vicar, St. Teresa's Church, Pakkil)</p></div></section>
+    <section class="section paper"><div class="reveal"><p class="kicker">Counting Down to Our Celebration</p><h2 class="display">See You Soon</h2><div class="count-grid" id="countdown" aria-label="Countdown to the housewarming"><div class="count"><b id="days">00</b><span>Days</span></div><div class="count"><b id="hours">00</b><span>Hours</span></div><div class="count"><b id="minutes">00</b><span>Minutes</span></div><div class="count"><b id="seconds">00</b><span>Seconds</span></div></div><p class="complete" id="complete" hidden></p></div></section>
+    <section class="section verse"><div class="reveal"><p class="kicker">A blessing for your visit</p><blockquote id="verseText">“As for me and my household, we will serve the Lord.”</blockquote><cite id="verseReference">Joshua 24:15</cite></div></section>
+    <section class="section paper"><div class="reveal"><p class="pin" aria-hidden="true">📍</p><p class="kicker">Location</p><h2 class="display">Our New Home</h2><div class="location-card"><p class="address">Earath (H) Vadekkeparambil Road<br><br>Ellimoodu, Pakkil P.O.<br>Kottayam, Kerala</p><a class="button" href="https://maps.app.goo.gl/oeFhaVhGbw7MiHA38?g_st=ac" target="_blank" rel="noopener noreferrer" aria-label="Get directions to our new home">Get Directions</a></div></div></section>
+    <section class="section rsvp"><div class="reveal"><p class="script">Your Presence is the Best Present</p><h2 class="display">We Hope to See You</h2><p class="copy">Your presence, prayers, and blessings will make this special day even more meaningful to us.</p><p class="script">We can't wait to welcome you home. ❤️</p><div class="flourish">❦</div>
+    <div class="phone-group">
+      <a class="phone-item" href="tel:+919447464486" aria-label="Call Albert at 9447464486">📞 9447464486</a>
+      <span class="phone-sep">|</span>
+      <a class="phone-item" href="tel:+919496114159" aria-label="Call Salini at 9496114159">📞 9496114159</a>
+    </div>
+    <a class="button" href="tel:+919447464486" aria-label="Call to RSVP">Call to RSVP</a></div></section>
+  </main>
+  <footer class="footer">
+    <div class="flourish host-secret-trigger" id="hostSecretTrigger" title="Tap 3 times for Host Access" role="button" tabindex="0" aria-label="Secret Host Access">❦</div>
+    With Prayerful Wishes
+    <strong>Joseph Albert • Job Albert • Anna Rose Albert</strong>
+  </footer>
+
+  <!-- Host-Only View Counter & Analytics Dashboard (Hidden from Regular Guests) -->
+  <div id="hostPill" class="host-pill" style="display:none;" role="button" tabindex="0" aria-label="Open Host Analytics">
+    <span class="host-dot"></span>
+    <span class="host-pill-text">👁️ <b id="hostPillCount">...</b> Views</span>
+    <span class="host-pill-tag">Host Mode</span>
+  </div>
+
+  <!-- Host Analytics Modal -->
+  <div id="hostModal" class="host-modal-backdrop" style="display:none;" aria-modal="true" role="dialog" aria-labelledby="hostModalTitle">
+    <div class="host-modal-card">
+      <button class="host-modal-close" id="hostModalClose" type="button" aria-label="Close Analytics Dashboard">✕</button>
+      <div class="host-modal-header">
+        <span class="kicker">Albert FJ &amp; Salini Joseph</span>
+        <h3 id="hostModalTitle">Host Analytics</h3>
+        <p>Private Guest Viewership • Only visible to you</p>
+      </div>
+
+      <div class="host-grid">
+        <div class="host-card">
+          <b id="hostStatViews">--</b>
+          <span>Total Page Views</span>
+        </div>
+        <div class="host-card">
+          <b id="hostStatUniques">--</b>
+          <span>Unique Devices</span>
+        </div>
+      </div>
+
+      <div class="host-shield">
+        <strong>🛡️ Host Shield Active</strong>
+        Your device is verified as Host. Your visits are excluded so your count stays 100% accurate.
+      </div>
+
+      <div class="host-actions">
+        <div class="host-btn-row">
+          <button class="host-btn primary" id="hostBtnRefresh" type="button">🔄 Refresh Live</button>
+          <button class="host-btn" id="hostBtnCopyGuest" type="button">📋 Copy Guest Link</button>
+        </div>
+        <div class="host-btn-row">
+          <button class="host-btn" id="hostBtnCopyAdmin" type="button">🔗 Copy Admin Link</button>
+          <button class="host-btn danger" id="hostBtnExit" type="button">🚪 Exit Host Mode</button>
+        </div>
+      </div>
+      <div class="host-sync-status" id="hostSyncStatus">🟢 Live Synchronized</div>
+    </div>
+  </div>
+
+  <!-- Secret Host PIN Verification Modal -->
+  <div id="hostPinModal" class="host-modal-backdrop" style="display:none;" aria-modal="true" role="dialog" aria-labelledby="hostPinTitle">
+    <div class="host-modal-card">
+      <button class="host-modal-close" id="hostPinClose" type="button" aria-label="Close PIN verification">✕</button>
+      <div class="host-modal-header">
+        <span class="kicker">Host Verification</span>
+        <h3 id="hostPinTitle">Enter Host PIN</h3>
+        <p>Enter your 4-digit PIN to unlock private analytics</p>
+      </div>
+      <input type="password" inputmode="numeric" maxlength="6" id="hostPinInput" class="host-pin-input" placeholder="••••" autocomplete="off">
+      <div class="host-pin-error" id="hostPinError"></div>
+      <div class="host-actions">
+        <button class="host-btn primary" id="hostPinSubmit" type="button" style="width:100%">Unlock Dashboard</button>
+      </div>
+      <div class="host-sync-status">Enter your secret host PIN</div>
+    </div>
+  </div>
+
+  <script>
+    // Easy-to-edit event settings.
+    const EVENT_DATE = "2026-09-14T09:00:00+05:30";
+    const MAP_URL = "https://maps.app.goo.gl/oeFhaVhGbw7MiHA38?g_st=ac";
+    const MUSIC_FILE = "assets/background-music.mp3";
+    const RSVP_PHONE = "+919447464486";
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const journey = document.querySelector('.journey'), wide = document.querySelector('.wide'), close = document.querySelector('.close'), scenes = [...document.querySelectorAll('.scene')];
+    const ambientWide = document.querySelector('.ambient-img.wide');
+    const ambientClose = document.querySelector('.ambient-img.close');
+    let ticking = false;
+    // Scroll-driven camera approach with mobile-tailored zoom and smooth scene transitions
+    function updateJourney() {
+      const isMobile = window.innerWidth <= 768;
+      const start = journey.offsetTop;
+      const range = Math.max(1, journey.offsetHeight - window.innerHeight);
+      const p = Math.max(0, Math.min(1, (window.scrollY - start) / range));
+      const maxZoom = isMobile ? (reduceMotion ? 0.04 : 0.16) : (reduceMotion ? 0.07 : 0.38);
+      const zoom = 1 + p * maxZoom;
+      const yShift = p * (reduceMotion ? -1 : (isMobile ? -1.5 : -3));
+      wide.style.transform = `scale(${zoom}) translateY(${yShift}%)`;
+      const closeScale = isMobile ? (1.03 + p * (reduceMotion ? 0.02 : 0.12)) : (1.08 + p * (reduceMotion ? 0.04 : 0.26));
+      close.style.transform = `scale(${closeScale}) translateY(${yShift}%)`;
+      const fade = Math.max(0, Math.min(1, (p - 0.52) / 0.17));
+      wide.style.opacity = 1 - fade;
+      close.style.opacity = fade;
+      if (ambientWide && ambientClose) {
+        ambientWide.style.opacity = 1 - fade;
+        ambientClose.style.opacity = fade;
+        ambientWide.style.transform = `scale(${zoom * 1.1})`;
+        ambientClose.style.transform = `scale(${closeScale * 1.1})`;
+      }
+      const sceneIndex = p < 0.18 ? 0 : p < 0.38 ? 1 : p < 0.58 ? 2 : 3;
+      scenes.forEach((scene, i) => scene.classList.toggle('active', i === sceneIndex));
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateJourney); ticking = true; } }, { passive: true });
+    window.addEventListener('resize', updateJourney, { passive: true });
+    updateJourney();
+
+    // Mobile View Toggle: Full House vs Zoomed Fill
+    const stageEl = document.getElementById('stage');
+    const viewToggle = document.getElementById('viewToggle');
+    const viewToggleIcon = document.getElementById('viewToggleIcon');
+    const viewToggleText = document.getElementById('viewToggleText');
+    if (viewToggle && stageEl) {
+      viewToggle.addEventListener('click', () => {
+        const isFill = stageEl.classList.toggle('fill-mode');
+        if (isFill) {
+          viewToggleIcon.textContent = '🔍';
+          viewToggleText.textContent = 'Zoomed';
+          showToast('🔍 Zoomed Fill Mode');
+        } else {
+          viewToggleIcon.textContent = '📐';
+          viewToggleText.textContent = 'Full House';
+          showToast('📐 Full House View (100% visible)');
+        }
+      });
+    }
+    // Live IST countdown; never permits negative values.
+    const units = {days:86400000,hours:3600000,minutes:60000,seconds:1000};
+    let celebrationShown=false;
+    // A concise, no-library spark-burst celebrates the beginning of the ceremony.
+    function launchCelebration(){ if(celebrationShown || reduceMotion) return; celebrationShown=true; const layer=document.createElement('div'); layer.className='celebration'; const note=document.createElement('div'); note.className='sparkle-note'; note.innerHTML='The Celebration Has Begun ❤️<small>Welcome Home</small>'; layer.append(note); const colors=['#f4c6ab','#fff8e7','#d48a68','#9bb6cc']; for(let i=0;i<52;i++){const spark=document.createElement('i');spark.className='spark'; const angle=(Math.PI*2*i/52)+(Math.random()*.12), distance=innerWidth*(.22+Math.random()*.33); spark.style.setProperty('--x',`${Math.cos(angle)*distance}px`);spark.style.setProperty('--y',`${Math.sin(angle)*distance}px`);spark.style.setProperty('--spark',colors[i%colors.length]);spark.style.animationDelay=`${Math.random()*.18}s`;layer.append(spark);} document.body.append(layer);setTimeout(()=>layer.remove(),3200);}
+    function countdown(){ let remaining = new Date(EVENT_DATE)-Date.now(); if(remaining<=0){ document.querySelector('#countdown').hidden=true; const done=document.querySelector('#complete'); done.hidden=false; done.textContent='Today is the Day ❤️'; launchCelebration(); return; } for(const [key,ms] of Object.entries(units)){const value=Math.floor(remaining/ms); remaining%=ms; document.querySelector('#'+key).textContent=String(value).padStart(2,'0');} } countdown(); setInterval(countdown,1000);
+    // A different scripture is selected per visit; the previous one is avoided on the same device.
+    const verses=[
+      ['“As for me and my household, we will serve the Lord.”','Joshua 24:15'],
+      ['“Unless the Lord builds the house, the builders labor in vain.”','Psalm 127:1'],
+      ['“The Lord bless you and keep you.”','Numbers 6:24'],
+      ['“May the Lord watch between you and me when we are absent one from another.”','Genesis 31:49'],
+      ['“Peace be within your walls and security within your citadels.”','Psalm 122:7'],
+      ['“My people will live in peaceful dwelling places, in secure homes, in undisturbed places of rest.”','Isaiah 32:18'],
+      ['“The blessing of the Lord brings wealth, without painful toil for it.”','Proverbs 10:22'],
+      ['“You will be blessed when you come in and blessed when you go out.”','Deuteronomy 28:6'],
+      ['“The Lord will keep you from all harm—he will watch over your life.”','Psalm 121:7'],
+      ['“Let all that you do be done in love.”','1 Corinthians 16:14']
+    ];
+    const prior=Number(localStorage.getItem('housewarmingVerse')); let verseIndex=Math.floor(Math.random()*verses.length); if(verses.length>1 && verseIndex===prior) verseIndex=(verseIndex+1)%verses.length; localStorage.setItem('housewarmingVerse',verseIndex); document.querySelector('#verseText').textContent=verses[verseIndex][0]; document.querySelector('#verseReference').textContent=verses[verseIndex][1];
+    // Manual-only background music with graceful unavailable state.
+    const audio=document.querySelector('#music'), musicButton=document.querySelector('#musicButton'); audio.volume=.2;
+    musicButton.addEventListener('click',async()=>{ if(audio.paused){try{await audio.play();}catch{musicButton.textContent='🎵 Music Unavailable';musicButton.setAttribute('aria-label','Background music is unavailable');return;}}else audio.pause(); });
+    audio.addEventListener('play',()=>{musicButton.textContent='🎵 Music On';musicButton.classList.add('playing');musicButton.setAttribute('aria-label','Turn background music off');}); audio.addEventListener('pause',()=>{musicButton.textContent='🎵 Music Off';musicButton.classList.remove('playing');musicButton.setAttribute('aria-label','Turn background music on');}); audio.addEventListener('error',()=>{musicButton.textContent='🎵 Music Unavailable';musicButton.disabled=true;});
+    // Gentle content reveals.
+    if(!reduceMotion && 'IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}),{threshold:.18});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+
+    // ==========================================
+    // ADD TO CALENDAR FUNCTIONALITY
+    // ==========================================
+    const CAL_EVENT = {
+      title: "Housewarming Ceremony - Albert FJ & Salini Joseph",
+      description: "Housewarming ceremony and blessing of our new home.\nHousewarming Service by Rev. Fr. Johnson Ottathenginkal (Vicar, St. Teresa's Church, Pakkil).\nContact: +91 9447464486 / +91 9496114159",
+      location: "Earath (H) Vadekkeparambil Road, Ellimoodu, Pakkil P.O., Kottayam, Kerala",
+      startUtc: "20260914T033000Z", // 9:00 AM IST (UTC+5:30)
+      endUtc: "20260914T073000Z",   // 1:00 PM IST
+      googleUrl() {
+        const u = new URL("https://calendar.google.com/calendar/render");
+        u.searchParams.set("action", "TEMPLATE");
+        u.searchParams.set("text", this.title);
+        u.searchParams.set("dates", `${this.startUtc}/${this.endUtc}`);
+        u.searchParams.set("details", this.description);
+        u.searchParams.set("location", this.location);
+        return u.toString();
+      },
+      outlookUrl() {
+        const u = new URL("https://outlook.live.com/calendar/0/deeplink/compose");
+        u.searchParams.set("subject", this.title);
+        u.searchParams.set("startdt", "2026-09-14T03:30:00Z");
+        u.searchParams.set("enddt", "2026-09-14T07:30:00Z");
+        u.searchParams.set("body", this.description);
+        u.searchParams.set("location", this.location);
+        return u.toString();
+      },
+      downloadIcs() {
+        const cleanDesc = this.description.replace(/\n/g, "\\n");
+        const icsContent = [
+          "BEGIN:VCALENDAR",
+          "VERSION:2.0",
+          "PRODID:-//Albert and Salini//Housewarming Invitation//EN",
+          "CALSCALE:GREGORIAN",
+          "METHOD:PUBLISH",
+          "BEGIN:VEVENT",
+          "UID:housewarming-albert-salini-20260914@pakkil",
+          "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z",
+          `DTSTART:${this.startUtc}`,
+          `DTEND:${this.endUtc}`,
+          `SUMMARY:${this.title}`,
+          `DESCRIPTION:${cleanDesc}`,
+          `LOCATION:${this.location}`,
+          "STATUS:CONFIRMED",
+          "BEGIN:VALARM",
+          "TRIGGER:-P1D",
+          "ACTION:DISPLAY",
+          "DESCRIPTION:Reminder: Albert & Salini's Housewarming Ceremony Tomorrow at 9:00 AM",
+          "END:VALARM",
+          "BEGIN:VALARM",
+          "TRIGGER:-PT2H",
+          "ACTION:DISPLAY",
+          "DESCRIPTION:Housewarming Ceremony starts in 2 hours",
+          "END:VALARM",
+          "END:VEVENT",
+          "END:VCALENDAR"
+        ].join("\r\n");
+
+        const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.setAttribute("download", "Albert-Salini-Housewarming.ics");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => window.URL.revokeObjectURL(link.href), 1000);
+      }
+    };
+
+    const calBtnTrigger = document.getElementById("calBtnTrigger");
+    const calDropdown = document.getElementById("calDropdown");
+    const calGoogle = document.getElementById("calGoogle");
+    const calOutlook = document.getElementById("calOutlook");
+    const calApple = document.getElementById("calApple");
+    const calIcs = document.getElementById("calIcs");
+
+    if (calBtnTrigger && calDropdown) {
+      calGoogle.href = CAL_EVENT.googleUrl();
+      calOutlook.href = CAL_EVENT.outlookUrl();
+
+      calApple.addEventListener("click", (e) => {
+        e.preventDefault();
+        CAL_EVENT.downloadIcs();
+        calDropdown.hidden = true;
+        calBtnTrigger.setAttribute("aria-expanded", "false");
+        showToast("📅 Added to Apple Calendar!");
+      });
+
+      calIcs.addEventListener("click", (e) => {
+        e.preventDefault();
+        CAL_EVENT.downloadIcs();
+        calDropdown.hidden = true;
+        calBtnTrigger.setAttribute("aria-expanded", "false");
+        showToast("📥 Calendar invite (.ics) downloaded!");
+      });
+
+      calBtnTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = !calDropdown.hidden;
+        calDropdown.hidden = isOpen;
+        calBtnTrigger.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!calDropdown.hidden && !calDropdown.contains(e.target) && e.target !== calBtnTrigger) {
+          calDropdown.hidden = true;
+          calBtnTrigger.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    // ========================================================
+    // PRIVATE VIEWER TRACKING & HOST ANALYTICS (Owner-Only)
+    // ========================================================
+    const TRACKING_CONFIG = {
+      namespace: "albert-salini-pakkil-2026",
+      apiBase: "https://abacus.jasoncameron.dev",
+      adminPin: "2007",
+      timeoutMs: 5000
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasAdminQuery = urlParams.has('admin') || urlParams.has('owner') || urlParams.has('host') || window.location.hash === '#admin';
+    const isStoredHost = localStorage.getItem('hw_is_host') === 'true';
+    let isHostMode = hasAdminQuery || isStoredHost;
+
+    if (hasAdminQuery) {
+      localStorage.setItem('hw_is_host', 'true');
+      isHostMode = true;
+    }
+
+    const hostPill = document.getElementById('hostPill');
+    const hostModal = document.getElementById('hostModal');
+    const hostPinModal = document.getElementById('hostPinModal');
+    const hostModalClose = document.getElementById('hostModalClose');
+    const hostPinClose = document.getElementById('hostPinClose');
+    const hostPinInput = document.getElementById('hostPinInput');
+    const hostPinSubmit = document.getElementById('hostPinSubmit');
+    const hostPinError = document.getElementById('hostPinError');
+    const hostPillCount = document.getElementById('hostPillCount');
+    const hostStatViews = document.getElementById('hostStatViews');
+    const hostStatUniques = document.getElementById('hostStatUniques');
+    const hostSyncStatus = document.getElementById('hostSyncStatus');
+    const hostBtnRefresh = document.getElementById('hostBtnRefresh');
+    const hostBtnCopyGuest = document.getElementById('hostBtnCopyGuest');
+    const hostBtnCopyAdmin = document.getElementById('hostBtnCopyAdmin');
+    const hostBtnExit = document.getElementById('hostBtnExit');
+    const hostSecretTrigger = document.getElementById('hostSecretTrigger');
+
+    function showToast(msg) {
+      const existing = document.querySelector('.host-toast');
+      if (existing) existing.remove();
+      const toast = document.createElement('div');
+      toast.className = 'host-toast';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2800);
+    }
+
+    async function fetchWithTimeout(url, options = {}) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), TRACKING_CONFIG.timeoutMs);
+      try {
+        const response = await fetch(url, { ...options, signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (err) {
+        clearTimeout(timeoutId);
+        return null;
+      }
+    }
+
+    // Records guest visits silently without displaying anything
+    async function recordGuestVisit() {
+      if (isHostMode) return;
+      try {
+        // 1. Increment total page views
+        fetchWithTimeout(`${TRACKING_CONFIG.apiBase}/hit/${TRACKING_CONFIG.namespace}/visits`);
+
+        // 2. Increment unique visitors if first visit on this device
+        if (!localStorage.getItem('hw_guest_unique_seen')) {
+          localStorage.setItem('hw_guest_unique_seen', 'true');
+          fetchWithTimeout(`${TRACKING_CONFIG.apiBase}/hit/${TRACKING_CONFIG.namespace}/uniques`);
+        }
+      } catch (e) {}
+    }
+
+    // Retrieves current counts safely without incrementing
+    async function refreshHostStats() {
+      if (!isHostMode) return;
+      hostSyncStatus.textContent = "🔄 Fetching live counts...";
+      try {
+        const [visitsRes, uniquesRes] = await Promise.all([
+          fetchWithTimeout(`${TRACKING_CONFIG.apiBase}/get/${TRACKING_CONFIG.namespace}/visits`),
+          fetchWithTimeout(`${TRACKING_CONFIG.apiBase}/get/${TRACKING_CONFIG.namespace}/uniques`)
+        ]);
+
+        const views = visitsRes && typeof visitsRes.value === 'number' ? visitsRes.value : (Number(localStorage.getItem('hw_cached_views')) || 1);
+        const uniques = uniquesRes && typeof uniquesRes.value === 'number' ? uniquesRes.value : (Number(localStorage.getItem('hw_cached_uniques')) || 1);
+
+        localStorage.setItem('hw_cached_views', views);
+        localStorage.setItem('hw_cached_uniques', uniques);
+
+        hostPillCount.textContent = views;
+        hostStatViews.textContent = views;
+        hostStatUniques.textContent = uniques;
+
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        hostSyncStatus.textContent = `🟢 Live Synchronized • ${timeStr}`;
+      } catch (err) {
+        hostSyncStatus.textContent = "⚠️ Could not reach server. Showing cached counts.";
+      }
+    }
+
+    function enableHostMode() {
+      isHostMode = true;
+      localStorage.setItem('hw_is_host', 'true');
+      hostPill.style.display = 'flex';
+      refreshHostStats();
+      showToast("🔐 Host Mode Activated");
+    }
+
+    function disableHostMode() {
+      isHostMode = false;
+      localStorage.removeItem('hw_is_host');
+      hostPill.style.display = 'none';
+      hostModal.style.display = 'none';
+      if (window.location.search.includes('admin') || window.location.hash.includes('admin')) {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+      showToast("Host Mode Exited (Guest View Active)");
+    }
+
+    // Secret Tap Trigger: 3 clicks within 1.5 seconds on the footer flourish
+    let secretClicks = 0;
+    let clickTimer = null;
+    function handleSecretTrigger(e) {
+      if (e) e.preventDefault();
+      secretClicks++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => { secretClicks = 0; }, 1400);
+
+      if (secretClicks >= 3) {
+        secretClicks = 0;
+        if (isHostMode) {
+          hostModal.style.display = 'grid';
+          refreshHostStats();
+        } else {
+          hostPinInput.value = '';
+          hostPinError.textContent = '';
+          hostPinModal.style.display = 'grid';
+          setTimeout(() => hostPinInput.focus(), 150);
+        }
+      }
+    }
+
+    if (hostSecretTrigger) {
+      hostSecretTrigger.addEventListener('click', handleSecretTrigger);
+      hostSecretTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') handleSecretTrigger(e);
+      });
+    }
+
+    // Keyboard shortcut: Alt + V or Ctrl + Shift + V
+    window.addEventListener('keydown', (e) => {
+      if ((e.altKey && e.key.toLowerCase() === 'v') || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'v')) {
+        e.preventDefault();
+        if (isHostMode) {
+          hostModal.style.display = hostModal.style.display === 'none' ? 'grid' : 'none';
+          if (hostModal.style.display === 'grid') refreshHostStats();
+        } else {
+          hostPinInput.value = '';
+          hostPinError.textContent = '';
+          hostPinModal.style.display = 'grid';
+          setTimeout(() => hostPinInput.focus(), 150);
+        }
+      }
+    });
+
+    // PIN Verification
+    function verifyPin() {
+      if (hostPinInput.value === TRACKING_CONFIG.adminPin) {
+        hostPinModal.style.display = 'none';
+        enableHostMode();
+        hostModal.style.display = 'grid';
+      } else {
+        hostPinError.textContent = "Incorrect PIN. Please try again.";
+        hostPinInput.select();
+      }
+    }
+
+    hostPinSubmit.addEventListener('click', verifyPin);
+    hostPinInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') verifyPin();
+    });
+
+    // Modal Events
+    hostPill.addEventListener('click', () => {
+      hostModal.style.display = 'grid';
+      refreshHostStats();
+    });
+    hostModalClose.addEventListener('click', () => { hostModal.style.display = 'none'; });
+    hostPinClose.addEventListener('click', () => { hostPinModal.style.display = 'none'; });
+
+    hostModal.addEventListener('click', (e) => {
+      if (e.target === hostModal) hostModal.style.display = 'none';
+    });
+    hostPinModal.addEventListener('click', (e) => {
+      if (e.target === hostPinModal) hostPinModal.style.display = 'none';
+    });
+
+    hostBtnRefresh.addEventListener('click', refreshHostStats);
+
+    hostBtnCopyGuest.addEventListener('click', async () => {
+      const cleanUrl = window.location.origin + window.location.pathname;
+      try {
+        await navigator.clipboard.writeText(cleanUrl);
+        showToast("📋 Guest link copied! Ready to share.");
+      } catch {
+        prompt("Guest Link (Share this with guests):", cleanUrl);
+      }
+    });
+
+    hostBtnCopyAdmin.addEventListener('click', async () => {
+      const adminUrl = window.location.origin + window.location.pathname + "?admin";
+      try {
+        await navigator.clipboard.writeText(adminUrl);
+        showToast("🔗 Admin link copied! Keep this private.");
+      } catch {
+        prompt("Admin Link (Keep this for yourself):", adminUrl);
+      }
+    });
+
+    hostBtnExit.addEventListener('click', disableHostMode);
+
+    // Initial Execution
+    if (isHostMode) {
+      enableHostMode();
+      if (hasAdminQuery) {
+        hostModal.style.display = 'grid';
+      }
+    } else {
+      recordGuestVisit();
+    }
+  </script>
+</body></html>
